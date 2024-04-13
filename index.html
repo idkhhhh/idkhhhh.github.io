@@ -1,3 +1,43 @@
-<html>
-<input> </input>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Send Email Form</title>
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+    (function(){
+        emailjs.init("service_ib6o16a");  // Replace 'your-user-id' with your actual EmailJS user ID
+    })();
+</script>
+</head>
+<body>
+    
+    <form id="myForm">
+        
+        <input type="text" id="message" name="message" required>
+        <button type="button" onclick="sendEmail()">Send Email</button>
+    </form>
+
+    <script>
+        function sendEmail() {
+            var message = document.getElementById('message').value;
+
+            var templateParams = {
+                message: message,
+                to_name: 'vayrot',  // Modify or remove as needed
+                // Add any other params your template uses
+            };
+
+            emailjs.send('service_ib6o16a', 'template_57ctqsld', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Email sent successfully!');
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Failed to send email: ' + error);
+                });
+        }
+    </script>
+</body>
 </html>
+
